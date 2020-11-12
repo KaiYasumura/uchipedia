@@ -1,0 +1,1078 @@
+@charset "UTF-8";
+/* リセットCSS
+===================================== */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, button, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
+}
+
+html {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+li, dd {
+  list-style-type: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+caption, th, td {
+  font-weight: normal;
+  text-align: left;
+  vertical-align: middle;
+}
+
+q, blockquote {
+  quotes: none;
+}
+
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+img {
+  border: none;
+  vertical-align: bottom;
+}
+
+// -----
+// 設定
+// -----
+// 色
+$color-main: #3e3e3e; // ベース色
+$color-active: #6A3B03; // アクティブ色
+$color-background-base: #FFF9F1; // 背景色
+$color-text-base: #3e3e3e; // テキスト色
+
+// レイアウト幅
+$layout-width-canvas: 1366px;
+$layout-width-inner: 1088px;
+
+// ブレークポイント
+$breakpoints: (
+	"sp": "(max-width: 767px)",
+	"tab-only": "(min-width: 768px) and (max-width: #{$layout-width-inner - 1px})",
+	"tab": "(max-width: #{$layout-width-inner - 1px})",
+	"pc": "(min-width: #{$layout-width-inner})",
+);
+
+// フォント
+$font-family-default: "游ゴシック体", "Yu Gothic", yugothic, "ヒラギノ角ゴ Pro", "Hiragino Kaku Gothic Pro", "メイリオ", meiryo, "MS Pゴシック", "MS PGothic", sans-serif; // 標準フォント
+$font-family-base: $font-family-default;
+$font-size-base: 16px;
+$font-weight-base: 400;
+$line-height-base: 1.6;
+
+// メディアクエリー
+@mixin mq($breakpoint: sp) {
+	@media #{map-get($breakpoints, $breakpoint)} {
+		@content;
+	}
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: $font-family-base;
+	font-size: $font-size-base;
+	font-weight: $font-weight-base;
+	color: $color-text-base;
+	line-height: $line-height-base;
+	background: $color-background-base;
+	overflow-x: hidden;
+	overflow-wrap: break-word;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+	border: none;
+}
+
+a {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+/* 共通クラス
+=================================================*/
+.inner {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+//タイトル
+.section-title {
+    margin: 0 100px;
+    padding: 20px;
+    background: #1DDB30;
+    font-size: 2rem;
+    border-radius: 30px;
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+    position: relative;
+
+    &:before {
+        content:"";
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width:30px 30px 0 30px;
+        border-color: #1DDB30 transparent transparent transparent;
+        position: absolute;
+        bottom: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+
+        @include mq('sp') {
+            border-width:20px 20px 0 20px;
+            bottom: -20px;
+        }
+    }
+
+    @include mq('tab') {
+        font-size: 1.8rem;
+    }
+
+    @include mq('sp') {
+        width: 80%;
+        margin: 0 auto;
+        padding: 15px;
+        font-size: 1.2rem;
+        text-align: center;
+    }
+    
+}
+
+//LINE@
+.line-link {
+    display: block;
+    width: 90%;
+    margin: 1.2rem auto;
+    text-align: center;
+    padding: 15px 30px;
+    background-color: #00B900;
+    color: #fff;
+    font-weight: bold;
+    font-size: 2rem;
+    border-radius: 50px;
+    transition: .2s;
+
+    &:hover {
+        transform: translateY(-0.1875em);
+        box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.6);
+    }
+
+    @include mq('sp') {
+        font-size: 1.5rem;
+        padding: 10px 20px;
+        margin-bottom: 0;
+    }
+}
+
+.line-icon {
+    width: 55px;
+
+    @include mq('sp') {
+        width: 40px;
+    }
+}
+
+/* header
+=================================================*/
+header {
+    height: 80px;
+    background: #1DDB30;
+
+    @include mq('sp') {
+        height: 60px;
+    }
+}
+
+.logo {
+    height: 100%;
+}
+
+/* top
+=================================================*/
+.top {
+    padding: 30px;
+    background-image: url(/images/top.jpg);
+    background-color:rgba(255,255,255,0.3);
+    background-blend-mode:lighten;
+    background-size: cover;
+    background-position: center center;
+}
+
+.top-inner{
+    padding: 50px 60px;
+    background: rgba(255, 255, 255, 0.7);
+
+    @include mq('tab') {
+        padding: 2rem;
+    }
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    text-align: center;
+
+    @include mq('tab') {
+        font-size: 2rem;
+    }
+
+    @include mq('sp') {
+        font-size: 1.4rem;
+    }
+}
+
+.name {
+    font-size: 4rem;
+    color: $color-active;
+    background: linear-gradient(transparent 70%,#CEBFA9 70% );
+
+    @include mq('tab') {
+        font-size: 3rem;
+    }
+
+    @include mq('sp') {
+        font-size: 2.5rem;
+    }
+}
+
+.top-items {
+    display: flex;
+    margin: 0 auto;
+    max-width: 900px;
+
+    @include mq('tab') {
+        max-width: 600px;
+    }
+
+    @include mq('sp') {
+        max-width: 250px;
+    }
+}
+
+.top-item {
+    padding: 50px 20px;
+    text-align: center;
+    display: inline-block;
+    min-width: 300px;
+    font-size: 3.5rem;
+    height: 300px;
+    line-height: 1;
+    font-weight: bold;
+    background-color: #FCEBD7;
+    border: 10px solid $color-active;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @include mq('tab') {
+        min-width: 200px;
+        height: 200px;
+        font-size: 2.1rem;
+    }
+
+    @include mq('sp') {
+        padding: 0;
+        min-width: 83.3333px;
+        height: 83.3333px;
+        font-size: 1rem;
+        border: 5px solid $color-active;
+    }
+}
+
+/* strength
+=================================================*/
+.strength {
+    padding: 30px 60px 0;
+
+    @include mq('sp') {
+        padding: 20px 15px;
+    }
+}
+
+.st-items {
+    margin-top: 30px;
+    position: relative;
+    width: 100%;
+}
+
+.st-item {
+    display: flex;
+    margin-top: 50px;
+
+    &:nth-child(even) {
+        flex-direction: row-reverse;
+    }
+
+    @include mq('sp') {
+        display: block;
+    }
+}
+
+.st-img {
+    width: 100%;
+
+    &>img {
+        max-width: 400px;
+
+        @include mq('tab') {
+            max-width: 350px; 
+        }
+
+        @include mq('sp') {
+            min-width: 285px;
+        }
+    }
+}
+
+.st-content {
+    background: rgb(212, 212, 212);
+    padding: 30px;
+
+    &:nth-child(2n) {
+        margin-right: -30px;
+    }
+
+    @include mq('tab') {
+        left: 320px;
+    }
+
+    @include mq('sp') {
+        width: 100%;
+    }
+}
+
+/* simulation
+=================================================*/
+.simulation {
+    padding: 30px 60px 0;
+
+    @include mq('sp') {
+        padding: 20px 15px;
+    }
+}
+
+.sim-img {
+    text-align: center;
+    margin-top: 50px;
+
+    &>img {
+        width: 60%;
+    }
+}
+
+.price {
+    display: flex;
+    margin: 0 auto;
+    justify-content: space-between;
+    padding: 0 100px;
+
+    @include mq('tab') {
+        padding: 0 120px;
+    }
+
+    @include mq('sp') {
+        padding: 0;
+        width: 80%;
+    }
+}
+
+table {
+    margin-top: 30px;
+}
+
+tr {
+    margin-top: 10px;
+    font-size: 2.3rem;
+
+    @include mq('tab') {
+        font-size: 1.8rem;
+    }
+
+    @include mq('sp') {
+        font-size: 0.8rem;
+    }
+}
+
+.price-ttl {
+    display: inline-block;
+    font-weight: bold;
+    margin-right: 30px;
+
+    @include mq('sp') {
+        margin-right: 15px;
+    }
+}
+
+td {
+    text-align: right;
+    font-weight: bold;
+}
+
+.a  {
+    display: flex;
+    align-items: center;
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.sim-price {
+    color: rgb(255, 0, 0);
+    font-weight: bold;
+    font-size: 2.3rem;
+
+    @include mq('tab') {
+        font-size: 1.8rem;
+    }
+
+    @include mq('sp') {
+        font-size: 1rem;
+    }
+}
+
+.sim-txt {
+    margin-top: 10px;
+    color: rgb(255, 0, 0);
+    font-weight: bold;
+    font-size: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:before,&:after {
+        content: "";
+        width: 60px;
+        height: 5px;
+        background: rgb(255, 0, 0);
+
+    @include mq('sp') {
+        width: 40px;
+    }
+    }
+
+    &:before {
+        transform: rotate(60deg);
+    }
+
+    &:after {
+        transform: rotate(-60deg);
+    }
+
+    @include mq('tab') {
+        font-size: 3rem;
+    }
+
+    @include mq('sp') {
+        font-size: 2rem;
+    }
+}
+
+.sim-arrow {
+    display: inline-block;
+    display: flex;
+    align-items: center;
+}
+
+.fa-arrow-right {
+    font-size: 4em;
+
+    @include mq('sp') {
+        font-size: 2rem;
+    }
+}
+
+/* number
+=================================================*/
+.number {
+    padding: 30px 60px 0;
+
+    @include mq('sp') {
+        padding: 20px 15px;
+    }
+}
+
+.company {
+    margin-top: 50px;
+
+    @include mq('sp') {
+        margin-top: 40px;
+    }
+}
+
+.company-images {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0  80px;
+
+    @include mq('sp') {
+        padding: 0 20px;
+    }
+}
+
+.company-img {
+    width: 50%;
+    height: 150px;
+    margin: 0 auto;
+
+    @include mq('tab') {
+        height: 120px;
+    }
+
+    @include mq('sp') {
+        height: 60px;
+    }
+}
+
+.company-txt {
+    padding: 40px 100px;
+    margin-top: 40px;
+    border-top: 3px solid $color-active;
+    font-weight: bold;
+    font-size: 1.4rem;
+
+    @include mq('sp') {
+        border-top: 2px solid $color-active;
+    }
+
+    @include mq('sp') {
+        font-size: 1rem;
+        padding: 40px 30px 0;
+    }
+}
+
+.company-txt-active {
+    color: $color-active;
+}
+
+/* search
+=================================================*/
+.search {
+    padding: 30px 60px 0;
+
+    @include mq('sp') {
+        padding: 20px 15px;
+    }
+}
+
+.search-content01 {
+    padding: 0 60px;
+
+    @include mq('sp') {
+        padding: 0 15px;
+    }
+}
+
+.search-ttl {
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 50px;
+
+    @include mq('sp') {
+        font-size: 1.5rem;
+        margin-top: 30px;
+    }
+}
+
+.search-inner {
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+
+    @include mq('sp') {
+        margin-top: 25px;
+    }
+}
+
+.step {
+    width: calc(50% - 40px * 1 / 2 );
+    margin-right: 40px;
+
+    &:nth-child(2n) {
+        margin-right: 0;
+    }
+
+    @include mq('sp') {
+        width: 100%;
+        margin-right: 0;
+        margin-top: 20px;
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+}
+
+.step-ttl {
+    font-size: 1.6rem;
+    font-weight: bold;
+
+    @include mq('sp') {
+        font-size: 1.2rem;
+    }
+}
+
+.step-img {
+    width: 100%;
+}
+
+.search-content02 {
+    padding: 0 60px;
+
+    @include mq('sp') {
+        padding: 0px 15px;
+    }
+} 
+
+.my-search-ttl {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:before,&:after {
+        content: "";
+        width: 40px;
+        height: 5px;
+        background: #3e3e3e;
+
+        @include mq('sp') {
+            width: 25px;
+            height: 4px;
+        }
+    }
+
+    &:before {
+        transform: rotate(60deg);
+    }
+
+    &:after {
+        transform: rotate(-60deg);
+    }
+
+    @include mq('sp') {
+        font-size: 1.5rem;
+    }
+}
+
+.my-search-inner {
+    margin-top: 50px;
+        
+    @include mq('sp') {
+        margin-top: 30px;
+    }
+}
+
+.my-step {
+    display: flex;
+
+    @include mq('sp') {
+        display: block;
+    }
+}
+
+.my-step-inner {
+    width: 100%;
+            
+    @include mq('sp') {
+        width: 100%;
+    }
+}
+
+.my-step-txt {
+    padding: 50px 40px;
+    width: 100%;
+
+    @include mq('sp') {
+        padding: 20px 15px;
+        width: 100%;
+    }
+}
+
+.search-info {
+    padding: 0 60px;
+    font-weight: bold;
+    text-align: center;
+    font-size: 3rem;
+    margin-top: 40px;
+    
+    @include mq('sp') {
+        padding: 0px;
+        font-size: 1.9rem;
+        margin-top: 0;
+    }
+}
+
+.fa-red {
+    color: red;
+}
+
+.arrow-icon {
+    text-align: center;
+}
+
+.app-icons {
+    max-width: 350px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+
+    @include mq('sp') {
+        max-width: 250px;
+    }
+}
+
+.app-icon {
+    width: 100px;
+
+    &>img {
+        width: 100%;
+    }
+
+    @include mq('sp') {
+        width: 80px;
+    }
+}
+
+.app-link-txt {
+    text-align: center;
+    font-weight: bold;
+}
+
+/* qa
+=================================================*/
+.qa {
+    padding: 30px 60px 0;
+
+    @include mq('sp') {
+        padding: 20px 15px;
+    }
+}
+
+.cp_qa {
+	margin: 0 0 2em 10px;
+	padding: 1em 0px 0.5em 1em;
+    background: #fff;
+    margin-top: 40px;
+        
+    @include mq('sp') {
+        margin: 25px 0 0 10px;
+    }
+}
+.qa-ttl {
+	font-size: 1.5rem;
+	position: relative;
+	margin-left: -26px;
+	padding: 0.3em;
+	color: #fff;
+	background-color: #000;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+    font-weight: bold;
+    text-align: center;
+    
+    &:after {
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        display: inline-block;
+        width: 0;
+        height: 0;
+        content: '';
+        border-width: 0 10px 10px 0;
+        border-style: solid;
+        border-color: transparent #000 transparent transparent;
+    }
+
+    @include mq('sp') {
+        font-size: 1.3rem;
+    }
+}
+
+.qa-content {
+	margin: 0;
+}
+.qa-q {
+	margin-bottom: 0.5em;
+	padding: 0.2em 0.5em 0.5em 2em;
+	border-radius: 0.2em;
+    background: #d8d8d8;
+    font-weight: bold;
+    font-size: 1.3rem;
+    
+    &:before {
+        margin: 0.3em 0.3em 0 -1em;
+        padding: 0.2em 0.4em;
+        content: 'Q';
+        font-size: 2rem;
+        font-weight: bold;
+
+        @include mq('tab') {
+            font-size: 1.5rem;
+        }
+
+        @include mq('sp') {
+            font-size: 1rem;
+        }
+    }
+
+    @include mq('tab') {
+        font-size: 1rem;
+    }
+
+    @include mq('sp') {
+        font-size: 0.9rem;
+    }
+}
+.qa-a {
+	margin-bottom: 1em;
+	margin-left: 1em;
+    padding: 0.5em 1em 1.5em 3em;
+    font-weight: bold;
+    font-size: 1.3rem;
+    
+    &:before {
+    	margin: 0 0.5em 0 -2em;
+        padding: 0.2em 0.4em;
+        content: 'A';
+        border-radius: 0.2em;
+        background: #000;
+        color: #fff;
+        font-size: 2rem;
+        font-weight: bold;
+
+        @include mq('tab') {
+            font-size: 1.5rem;
+        }
+
+        @include mq('sp') {
+            font-size: 1rem;
+        }
+    }
+
+    @include mq('tab') {
+        font-size: 1rem;
+        margin-left: 0.7rem;
+    }
+
+    @include mq('sp') {
+        font-size: 0.9rem;
+        margin-left: 0;
+    }
+}
+
+/* voice
+=================================================*/
+.voice {
+    padding: 30px 60px 0;
+
+    @include mq('sp') {
+        padding: 20px 15px;
+    }
+}
+
+.voice-list {
+    margin-top: 60px;
+        
+    @include mq('sp') {
+        margin-top: 40px;
+    }
+}
+
+.voice-list-items {
+    display: flex;
+    flex-wrap: wrap;
+    
+    @include mq('sp') {
+        display: block;
+    }
+}
+
+.voice-list-item {
+    width: calc(50% - 50px * 1 / 2);
+    margin-right: 50px;
+
+    &:nth-child(2n) {
+        margin-right: 0;
+    }
+
+    &>img {
+        padding-bottom: 30px;
+        border-bottom: 1px solid #000;
+    }
+        
+    @include mq('sp') {
+        width: 100%;
+        margin-right: 0;
+    }
+}
+
+.voice-txt {
+    padding: 30px 10px;
+    font-size: 1.1rem;
+
+
+    @include mq('tab') {
+        font-size: 1rem;
+    }
+}
+
+/* privacy-policy
+=================================================*/
+.privacy-policy {
+    margin-top: 50px;
+    padding: 30px 60px 0;
+
+    @include mq('sp') {
+        margin-top: 0px;
+        padding: 20px 15px;
+    }
+}
+
+.privacy-policy {
+    &>p {
+        font-weight: bold;
+            
+        @include mq('sp') {
+            font-size: 0.8rem;
+        }
+    }
+}
+
+.privacy-policy-ttl {
+    text-align: center;
+}
+
+.privacy-policy-inner {
+    margin-top: 30px;
+}
+
+/* about
+=================================================*/
+.about {
+padding: 50px 0;
+
+    &>h2 {
+        font-weight: bold;
+        font-size: 3rem;
+        text-align: center;
+            
+        @include mq('sp') {
+            font-size: 2rem;
+        }
+    }
+        
+    @include mq('sp') {
+        padding: 20px 0;
+    }
+}
+
+.about-info{
+    width: 70%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 40px auto 0;
+
+    @include mq('tab') {
+        width: 60%;
+    }
+        
+    @include mq('sp') {
+        width: 90%;
+        margin: 10px auto 0;
+    }
+}
+
+.info-content {
+    background: #fff;
+    text-align-last: left;
+
+    &:nth-child(odd){
+        background-color: #eee
+    }
+}
+  
+.info-head{
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.1rem;
+
+    @include mq('tab') {
+        font-size: 1rem;
+    }
+        
+    @include mq('sp') {
+        font-size: 0.8rem;
+        width: 80px;
+    }
+}
+
+.info-inner {
+    padding: 1rem;
+    text-align: center; 
+    font-size: 1.1rem; 
+
+    @include mq('tab') {
+        font-size: 1rem;
+    }
+        
+    @include mq('sp') {
+        font-size: 0.8rem;
+    }
+}
+
+/* footer
+=================================================*/
+footer {
+    background: #000;
+    text-align: center;
+    padding: 0.5rem 0; 
+}
+
+.copy-right {
+    color: #fff;
+        
+    @include mq('sp') {
+        font-size: 0.7rem;
+    }
+}
